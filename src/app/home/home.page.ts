@@ -7,6 +7,27 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  date = new Date().getFullYear()
+  version = "Beta v.0.1.453ab"
+  
+  lastCount
+  count:number = 0
+  constructor() {
+
+    this.lastCount = localStorage.getItem('count')
+
+    this.count = Number(this.lastCount)
+
+  }
+
+
+  counter(){
+
+    this.count = this.count + 1
+
+    localStorage.setItem('count', this.count.toString())
+
+    this.lastCount = localStorage.getItem('count')
+  }
 
 }
