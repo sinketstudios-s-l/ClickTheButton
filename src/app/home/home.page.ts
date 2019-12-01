@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Vibration } from '@ionic-native/vibration/ngx';
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +14,11 @@ export class HomePage {
   
   lastCount
   count:number = 0
-  constructor() {
+  constructor(
+    private nativeAudio: NativeAudio
+  ) {
+
+    nativeAudio.preloadSimple('button', '../../assets/sounds/button.mp3')
 
     this.lastCount = localStorage.getItem('count')
 
@@ -23,11 +29,17 @@ export class HomePage {
 
   counter(){
 
+    //this.vibration.vibrate(100)
+
+    this.nativeAudio.play('bbutton')
+
     this.count = this.count + 1
 
     localStorage.setItem('count', this.count.toString())
 
     this.lastCount = localStorage.getItem('count')
+
+
   }
 
 }
