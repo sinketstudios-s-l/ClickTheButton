@@ -11,8 +11,10 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { Vibration } from '@ionic-native/vibration/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
+import { SettingsPageModule } from './settings/settings.module';
 
-
+import { AdMobFree } from '@ionic-native/admob-free/ngx'
+import { AdMobFreeService } from './services/ad-mob-free.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,12 +23,15 @@ import { NativeAudio } from '@ionic-native/native-audio/ngx';
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule,
+    SettingsPageModule 
   ],
   providers: [
     Vibration,
     NativeAudio,
     StatusBar,
     SplashScreen,
+    AdMobFree,
+    AdMobFreeService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
