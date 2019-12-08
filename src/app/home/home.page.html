@@ -4,10 +4,12 @@
 
     <div class="header">
 
+      <!-- <span>MONEDAS: {{coins}}</span> -->
+
       <span style="font-size: 12px; opacity: .5;">Soon...</span>
       <br>
 
-      <i id="archivements">
+      <i id="achievements" (click)="achievements()">
         <svg class="ico" xmlns="http://www.w3.org/2000/svg" height="512" viewBox="0 0 48 60" width="512">
           <g id="Page-1" fill="none" fill-rule="evenodd">
             <g id="005---Rosette" fill="rgb(0,0,0)" fill-rule="nonzero">
@@ -19,7 +21,7 @@
           </g>
         </svg>
       </i>
-      <i id="leaderboard">
+      <i id="leaderboard" (click)="leaderboard()">
         <svg class="ico" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="480pt"
           viewBox="-60 0 480 480" width="480pt">
           <linearGradient id="a">
@@ -56,7 +58,7 @@
     </div>
 
 
-    <div class="content">
+    <div class="content" id="content">
 
 
 
@@ -65,6 +67,8 @@
         <h2>Click The Button!</h2>
 
       </div>
+
+      <span class="pointAdd">+1</span>
 
       <img src="../../assets/button.png" (click)="counter()">
 

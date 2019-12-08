@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.sinketstudios.clickthebutton" version="0.1.548a" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>ClickTheButton</name>
+    <name>Simple Button Clicker</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">SinketStudios SL</author>
     <content src="index.html" />

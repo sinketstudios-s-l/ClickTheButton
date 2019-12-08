@@ -45,7 +45,7 @@ export class SettingsPage implements OnInit {
 
   resetScore(){
 
-    this.presentAlert("Reset Account","Do you really want to reset your account with "+this.count+" times clicked?")
+    this.presentAlert("Reset Score","Do you really want to reset your score account with "+this.count+" times clicked?")
 
 
   }

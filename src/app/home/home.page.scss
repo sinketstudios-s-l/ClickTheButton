@@ -42,3 +42,35 @@ img {
 i#settings .ico{
     opacity: 1;
 }
+
+
+
+.pointAdd{
+    display: none;
+}
+
+.pointero {
+    position: absolute;
+    font-size: 25px;
+    font-family: sans-serif;
+    border: 1px red;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: opacityOn .7s forwards ease-out;
+}
+
+@keyframes opacityOn {
+    0% {
+        opacity: 1;
+        top: 40%;
+        transform: rotate(45);
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+        top: 70%;
+    }
+}
