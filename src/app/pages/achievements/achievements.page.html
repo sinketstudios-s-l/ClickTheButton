@@ -9,4 +9,27 @@
 
 <ion-content>
 
+  <ion-list>
+
+    <ion-item *ngFor="let achv of achievements" lines="none" class="achvRow" [id]="achv.id" >
+      <ion-avatar slot="start">
+        <ion-img src="https://img.pngio.com/computer-icons-achievement-clip-art-learning-from-other-png-achievement-png-900_520.jpg"></ion-img>
+      </ion-avatar>
+
+      <ion-label slot="start" no-padding>
+        <h2>{{achv.title}}</h2>
+        <ion-progress-bar  value="{{lastCount  / achv.goal}}" color="dark"></ion-progress-bar>
+        <p *ngIf="100 >= lastCount * 100 / achv.goal">{{lastCount}}/{{achv.goal}}</p>
+        <p *ngIf="lastCount * 100 / achv.goal >= 100 ">COMPLETED</p>
+      </ion-label>
+
+      <!-- <span *ngIf="100 >= lastCount * 100 / achv.goal">{{(lastCount * 100 / achv.goal).toPrecision(3)}} %</span>
+      <span *ngIf="lastCount * 100 / achv.goal>= 100 ">COMPLETED</span> -->
+
+    </ion-item>
+
+  </ion-list>
+
+  <ion-button (click)="counter()">Count</ion-button>
+
 </ion-content>

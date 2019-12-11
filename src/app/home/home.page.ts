@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 //import { Vibration } from '@ionic-native/vibration/ngx';
 //import { NativeAudio } from '@ionic-native/native-audio/ngx';
-import { ModalController, Platform } from '@ionic/angular';
+import { ModalController, Platform, ActionSheetController, ToastController } from '@ionic/angular';
 import { SettingsPage } from '../settings/settings.page';
 import { AdMobFreeService } from '../services/ad-mob-free.service';
 import { Router } from '@angular/router';
@@ -26,7 +26,8 @@ export class HomePage implements OnInit{
     private modalCtrl: ModalController,
     private adMobSvc: AdMobFreeService,
     private platform: Platform,
-    private route: Router
+    private route: Router,
+    private toastCtrl: ToastController
   ) {
 
     //nativeAudio.preloadSimple('button', '../../assets/sounds/button.mp3')
@@ -45,10 +46,27 @@ export class HomePage implements OnInit{
 
     this.platform.ready().then(() => {
       this.adMobSvc.banner()
+
     })
 
   }
 
+  async achiev() {
+
+    const toast = await this.toastCtrl.create({
+      header: ' asd',
+      message:'<ion-icon name="trophy"> Your message',
+      mode: "ios",
+      animated: true,
+      id: "1",
+      duration: 3000,
+      position: "top",
+      
+    })
+
+    await toast.present()
+
+  }
   
 
   counter(){  
@@ -96,21 +114,10 @@ export class HomePage implements OnInit{
 
     this.lastCount = localStorage.getItem('count')
 
-    // document.getElementById('pointAdd').remove()
-    // let t = document.createElement('span')
-    // t.setAttribute('class', 'pointAdd')
-    // t.setAttribute('id', 'pointAdd')
-    // let c = document.getElementById('content')
-
-    // c.appendChild(t)
-
-    let t = document.getElementsByClassName('pointAdd')[0]
-    t.classList.remove('pointAdd')
-    t.classList.add('pointero')
+  
 
 
   }
-
 
   async settings(){
 
