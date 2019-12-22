@@ -8,6 +8,7 @@ import { ModalController, AlertController } from '@ionic/angular';
 })
 export class SettingsPage implements OnInit {
   count
+  theme
   constructor(
     private modalCtrl: ModalController,
     private alertCtrl: AlertController
@@ -16,6 +17,8 @@ export class SettingsPage implements OnInit {
   ngOnInit() {
     this.count = localStorage.getItem('count')
     this.count = Number(this.count)
+
+    this.theme = localStorage.getItem('theme')
   }
 
   async presentAlert(header:string, message:string){
@@ -47,6 +50,23 @@ export class SettingsPage implements OnInit {
 
     this.presentAlert("Reset Score","Do you really want to reset your score account with "+this.count+" times clicked?")
 
+  }
+
+  toggle(){
+
+    console.log(this.theme)
+
+    switch(this.theme){
+      case false: 
+        localStorage.setItem('theme','true')
+
+        console.log('light mode')
+      break;
+      case true:
+        localStorage.setItem('theme','false')
+        console.log('dark mode')
+      break;
+    }
 
   }
 

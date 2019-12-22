@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 export class HomePage implements OnInit{
 
   date = new Date().getFullYear()
-  version = "Beta v.0.1.548a"
+  version = "Build version 0.1.550"
   
   lastCount
   count:number = 0
@@ -48,23 +48,6 @@ export class HomePage implements OnInit{
       this.adMobSvc.banner()
 
     })
-
-  }
-
-  async achiev() {
-
-    const toast = await this.toastCtrl.create({
-      header: ' asd',
-      message:'<ion-icon name="trophy"> Your message',
-      mode: "ios",
-      animated: true,
-      id: "1",
-      duration: 3000,
-      position: "top",
-      
-    })
-
-    await toast.present()
 
   }
   

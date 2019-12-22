@@ -10,21 +10,15 @@
 <ion-content>
 
 
-  <ion-list>
+  <div class="rowList" id="rowList">
 
-    <ion-item *ngFor="let i of leaderList" lines="full">
-      <ion-avatar slot="start">
-        <img [src]="i.img" alt="">
-      </ion-avatar>
-      <ion-label slot="start"> 
-        {{i.uid}} 
-      </ion-label>
-      <ion-label slot="end">
-        {{i.count}}
-      </ion-label>
-    </ion-item>
-
-  </ion-list>
+  </div>
   
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="sync()">
+      <ion-icon name="sync" mode="md"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
 </ion-content>
