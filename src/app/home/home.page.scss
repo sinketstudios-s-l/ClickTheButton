@@ -10,6 +10,7 @@ ion-content{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 100%;
 }
 
 img {
@@ -28,20 +29,17 @@ img {
     text-align: center;
     top: 15%;
     left: 50%;
+    width: 100%;
     transform: translate(-50%, -50%);
 }
 
 
 .ico {
-    opacity: 0.3;
     width: 32px;
     height: 32px;
     margin: 1rem;
 }
 
-i#settings .ico{
-    opacity: 1;
-}
 
 
 

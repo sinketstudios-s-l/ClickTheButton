@@ -139,4 +139,7 @@ export class HomePage implements OnInit {
     this.route.navigate(['/achievements'])
   }
 
+  stats(){
+    this.route.navigate(['/stats'])
+  }
 }
