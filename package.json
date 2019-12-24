@@ -28,6 +28,7 @@
     "@ionic-native/vibration": "^5.18.0",
     "@ionic/angular": "^4.11.7",
     "cordova-admob-sdk": "0.24.1",
+    "cordova-android": "8.1.0",
     "cordova-ios": "^5.1.1",
     "cordova-plugin-admob-free": "^0.27.0",
     "cordova-plugin-nativeaudio": "^3.0.9",
@@ -86,6 +87,9 @@
         "ADMOB_APP_ID": "ca-app-pub-3993710682934611~8177040559"
       }
     },
-    "platforms": []
+    "platforms": [
+      "ios",
+      "android"
+    ]
   }
 }

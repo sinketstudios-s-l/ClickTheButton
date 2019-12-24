@@ -9,6 +9,10 @@ import { ModalController, AlertController } from '@ionic/angular';
 export class SettingsPage implements OnInit {
   count
   theme
+
+  date = new Date().getFullYear()
+  version = "Build version 0.1.560"
+
   constructor(
     private modalCtrl: ModalController,
     private alertCtrl: AlertController

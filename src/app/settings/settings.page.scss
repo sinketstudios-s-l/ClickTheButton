@@ -1,8 +1,19 @@
 ion-content {
     text-align: center;
+    position: relative;
 }
 
 .btn{
     width: 100%;
     border-radius: 40px;
+}
+
+.credits {
+
+    font-size: 12px;
+    color: #818181;
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translate(-50%,-50%);
 }

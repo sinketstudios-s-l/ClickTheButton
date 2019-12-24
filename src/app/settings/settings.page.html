@@ -15,12 +15,18 @@
   <ion-button mode="ios" class="btn" color="warning" (click)="resetScore()">Reset</ion-button>
 
 
-  <h2>Theme Mode</h2>
+  <!-- <h2>Theme Mode</h2>
   <ion-item lines="none">
     <ion-icon name="moon" mode="ios" slot="start"></ion-icon>
     <ion-toggle slot="start" [(ngModel)]="theme" (click)="toggle()" checked="{{theme}}"></ion-toggle>
     <ion-icon name="sunny" mode="ios" slot="start"></ion-icon>
-  </ion-item>
+  </ion-item> -->
 
+  <div class="credits">
 
+    <span>SinketStudios, S.L © {{date}}</span><br>
+    <span>{{version}}</span>
+
+  </div>
+  
 </ion-content>

@@ -12,15 +12,17 @@ import { Router } from '@angular/router';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit{
+export class HomePage implements OnInit {
 
   date = new Date().getFullYear()
-  version = "Build version 0.1.550"
-  
-  lastCount
-  count:number = 0
+  version = "Build version 0.1.560"
 
-  coins:number = 0
+  lastCount
+  realCount
+  count: number = 0
+
+  coins: number = 0
+
   constructor(
     //private nativeAudio: NativeAudio,
     private modalCtrl: ModalController,
@@ -31,18 +33,27 @@ export class HomePage implements OnInit{
   ) {
 
     //nativeAudio.preloadSimple('button', '../../assets/sounds/button.mp3')
+    const formatCash = n => {
+      if (n < 1e3) return n;
+      if (n >= 1e3 && n < 1e6) return +(n / 1e3).toFixed(1) + " k";
+      if (n >= 1e6 && n < 1e9) return +(n / 1e6).toFixed(1) + " M";
+      if (n >= 1e9 && n < 1e12) return +(n / 1e9).toFixed(1) + " B";
+      if (n >= 1e12) return +(n / 1e12).toFixed(1) + " T";
+    };
 
-    this.lastCount = localStorage.getItem('count')
+    this.lastCount = formatCash(localStorage.getItem('count'))
 
-    this.count = Number(this.lastCount)
+    this.count = Number(localStorage.getItem('count'))
 
-    if(!this.lastCount){
+    this.realCount = Number(localStorage.getItem('count'))
+
+    if (!this.lastCount) {
       this.lastCount = 0
     }
 
   }
 
-  ngOnInit(){
+  ngOnInit() {
 
     this.platform.ready().then(() => {
       this.adMobSvc.banner()
@@ -50,9 +61,11 @@ export class HomePage implements OnInit{
     })
 
   }
+
   
 
-  counter(){  
+
+  counter() {
 
     //this.vibration.vibrate(100)
 
@@ -68,41 +81,48 @@ export class HomePage implements OnInit{
 
     ////////////////////////////////
 
-    switch (this.count){
+    switch (this.count) {
       case 200:
         console.log('200!! yayyyy')
-      break;
+        break;
       case 201:
         console.log('201!! yayyyy')
-      break;
+        break;
       case 210:
         console.log('210!! yayyyy')
-      break;
+        break;
       case 220:
         console.log('220!! yayyyy')
-      break;
+        break;
       case 230:
         console.log('230!! yayyyy')
-      break;
+        break;
       case 240:
         console.log('240!! yayyyy')
-      break;
+        break;
       case 250:
         console.log('250!! yayyyy')
-      break;
+        break;
     }
-    
+
+    const formatCash = n => {
+      if (n < 1e3) return n;
+      if (n >= 1e3 && n < 1e6) return +(n / 1e3).toFixed(1) + " k";
+      if (n >= 1e6 && n < 1e9) return +(n / 1e6).toFixed(1) + " M";
+      if (n >= 1e9 && n < 1e12) return +(n / 1e9).toFixed(1) + " B";
+      if (n >= 1e12) return +(n / 1e12).toFixed(1) + " T";
+    };
 
     localStorage.setItem('count', this.count.toString())
 
-    this.lastCount = localStorage.getItem('count')
+    this.lastCount = formatCash(Number(localStorage.getItem('count')))
 
-  
+    this.realCount = Number(localStorage.getItem('count'))
 
 
   }
 
-  async settings(){
+  async settings() {
 
     const modal = await this.modalCtrl.create({
       component: SettingsPage
@@ -111,11 +131,11 @@ export class HomePage implements OnInit{
     await modal.present()
   }
 
-  leaderboard(){
+  leaderboard() {
     this.route.navigate(['/leaderboard'])
   }
 
-  achievements(){
+  achievements() {
     this.route.navigate(['/achievements'])
   }
 
