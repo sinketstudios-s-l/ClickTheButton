@@ -59,8 +59,8 @@ export class LeaderboardPage implements OnInit {
     
     
     item.setAttribute('class', 'item')
-    item.style.background = "#c7c7c7"
-    item.style.border = "1px solid #b9b9b9"
+    item.style.background = "#bcd5d6"
+    item.style.border = "1px solid #aac4c5"
     item.style.width = '90%'
     item.style.margin = " 1rem auto"
     item.style.textAlign = "center"
@@ -73,7 +73,7 @@ export class LeaderboardPage implements OnInit {
 
     itemLight.style.width = "97%"
     itemLight.style.margin = " 5px auto"
-    itemLight.style.background = "#d6d6d6"
+    itemLight.style.background = "#d1ebec"
     itemLight.style.borderRadius = "5px"
     itemLight.style.position = "absolute"
     itemLight.style.height = "20px"
@@ -109,7 +109,7 @@ export class LeaderboardPage implements OnInit {
     countCont.style.right = "0%"
     countCont.style.top = "50%"
     countCont.style.transform = "translate(-50%, -50%)"
-    countCont.style.background = "#969696"
+    countCont.style.background = "#9cc6c7"
     countCont.style.minWidth = "50px"
     countCont.style.color = "white"
     countCont.style.fontWeight = "bold"

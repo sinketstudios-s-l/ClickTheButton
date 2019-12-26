@@ -5,6 +5,7 @@ import { ModalController, Platform, ActionSheetController, ToastController } fro
 import { SettingsPage } from '../settings/settings.page';
 import { AdMobFreeService } from '../services/ad-mob-free.service';
 import { Router } from '@angular/router';
+import { ShopPage } from '../pages/shop/shop.page';
 
 
 @Component({
@@ -21,8 +22,9 @@ export class HomePage implements OnInit {
   realCount
   count: number = 0
 
-  coins: number = 0
+  coins: number = Number(localStorage.getItem('coins'))
 
+  lifeTimeCount: number = 0
   constructor(
     //private nativeAudio: NativeAudio,
     private modalCtrl: ModalController,
@@ -47,8 +49,11 @@ export class HomePage implements OnInit {
 
     this.realCount = Number(localStorage.getItem('count'))
 
-    if (!this.lastCount) {
+    this.lifeTimeCount = Number(sessionStorage.getItem('lifeCount'))
+
+    if (!this.lastCount || !this.coins) {
       this.lastCount = 0
+      this.coins = 0
     }
 
   }
@@ -62,7 +67,7 @@ export class HomePage implements OnInit {
 
   }
 
-  
+
 
 
   counter() {
@@ -75,35 +80,14 @@ export class HomePage implements OnInit {
 
     ////////  COINS SYSTEM  ////////
 
-    // if(this.count.toString().substr(this.count.toString().length - 1,this.count.toString().length).includes('0')){
-    //   this.coins = this.coins + 10
-    // } 
+    if(this.count.toString().substr(this.count.toString().length - 2,this.count.toString().length).includes('00')){
+      this.coins = this.coins + 10
+      localStorage.setItem('coins', this.coins.toString())
+    } 
 
     ////////////////////////////////
 
-    switch (this.count) {
-      case 200:
-        console.log('200!! yayyyy')
-        break;
-      case 201:
-        console.log('201!! yayyyy')
-        break;
-      case 210:
-        console.log('210!! yayyyy')
-        break;
-      case 220:
-        console.log('220!! yayyyy')
-        break;
-      case 230:
-        console.log('230!! yayyyy')
-        break;
-      case 240:
-        console.log('240!! yayyyy')
-        break;
-      case 250:
-        console.log('250!! yayyyy')
-        break;
-    }
+  
 
     const formatCash = n => {
       if (n < 1e3) return n;
@@ -113,12 +97,15 @@ export class HomePage implements OnInit {
       if (n >= 1e12) return +(n / 1e12).toFixed(1) + " T";
     };
 
+    this.lifeTimeCount = this.lifeTimeCount + 1
+
+    sessionStorage.setItem('lifeCount', this.lifeTimeCount.toString())
+
     localStorage.setItem('count', this.count.toString())
 
     this.lastCount = formatCash(Number(localStorage.getItem('count')))
 
     this.realCount = Number(localStorage.getItem('count'))
-
 
   }
 
@@ -132,14 +119,30 @@ export class HomePage implements OnInit {
   }
 
   leaderboard() {
-    this.route.navigate(['/leaderboard'])
+
+    if(this.realCount <= 500){
+
+    } else {
+      this.route.navigate(['/leaderboard'])
+    }
+
   }
 
   achievements() {
     this.route.navigate(['/achievements'])
   }
 
-  stats(){
+  stats() {
     this.route.navigate(['/stats'])
   }
+
+  async shop(){
+
+    const modal = await this.modalCtrl.create({
+      component: ShopPage
+    })
+    await modal.present()
+  }
+
+  
 }

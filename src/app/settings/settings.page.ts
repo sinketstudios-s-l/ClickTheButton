@@ -11,7 +11,7 @@ export class SettingsPage implements OnInit {
   theme
 
   date = new Date().getFullYear()
-  version = "Build version 0.1.560"
+  version = "Build version 0.1.565"
 
   constructor(
     private modalCtrl: ModalController,
@@ -72,6 +72,10 @@ export class SettingsPage implements OnInit {
       break;
     }
 
+  }
+
+  del(){
+    
   }
 
 }
