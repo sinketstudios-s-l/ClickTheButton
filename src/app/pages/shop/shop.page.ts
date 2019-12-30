@@ -8,11 +8,38 @@ import { ModalController } from '@ionic/angular';
 })
 export class ShopPage implements OnInit {
 
+  routes
   constructor(
     private modalCtrl: ModalController
   ) { }
 
   ngOnInit() {
+    this.routes = [
+      {
+        id: 1,
+        src: "../../assets/button.png",
+        price: 300
+      },
+      {
+        id: 2,
+        src: "../../assets/button.png",
+        price: 300
+      },
+      {
+        id: 3,
+        src: "../../assets/button.png",
+        price: 300
+      },
+      {
+        id: 4,
+        src: "../../assets/button.png",
+        price: 300
+      },
+    ]
+
+    var rand = Math.floor(this.routes.length * Math.random())
+
+   
   }
 
   close(){

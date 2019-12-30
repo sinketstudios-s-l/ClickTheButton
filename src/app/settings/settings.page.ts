@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
+import { SoundService } from '../services/sound.service';
 
 @Component({
   selector: 'app-settings',
@@ -13,16 +14,21 @@ export class SettingsPage implements OnInit {
   date = new Date().getFullYear()
   version = "Build version 0.1.565"
 
+  fx = localStorage.getItem('fx')
+  sound = localStorage.getItem('sound')
+
   constructor(
     private modalCtrl: ModalController,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private soundSvc: SoundService
   ) { }
 
   ngOnInit() {
+
     this.count = localStorage.getItem('count')
     this.count = Number(this.count)
-
     this.theme = localStorage.getItem('theme')
+
   }
 
   async presentAlert(header:string, message:string){
@@ -74,8 +80,16 @@ export class SettingsPage implements OnInit {
 
   }
 
+  toggleSound(){
+    this.soundSvc.toggleSound()
+  }
+
   del(){
     
   }
+
+
+
+  
 
 }

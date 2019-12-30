@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 //import { Vibration } from '@ionic-native/vibration/ngx';
-//import { NativeAudio } from '@ionic-native/native-audio/ngx';
 import { ModalController, Platform, ActionSheetController, ToastController } from '@ionic/angular';
 import { SettingsPage } from '../settings/settings.page';
 import { AdMobFreeService } from '../services/ad-mob-free.service';
 import { Router } from '@angular/router';
 import { ShopPage } from '../pages/shop/shop.page';
+import { SoundService } from '../services/sound.service';
 
 
 @Component({
@@ -24,17 +24,20 @@ export class HomePage implements OnInit {
 
   coins: number = Number(localStorage.getItem('coins'))
 
+
+
   lifeTimeCount: number = 0
   constructor(
-    //private nativeAudio: NativeAudio,
     private modalCtrl: ModalController,
     private adMobSvc: AdMobFreeService,
     private platform: Platform,
     private route: Router,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private soundSvc: SoundService
   ) {
 
-    //nativeAudio.preloadSimple('button', '../../assets/sounds/button.mp3')
+
+
     const formatCash = n => {
       if (n < 1e3) return n;
       if (n >= 1e3 && n < 1e6) return +(n / 1e3).toFixed(1) + " k";
@@ -62,7 +65,7 @@ export class HomePage implements OnInit {
 
     this.platform.ready().then(() => {
       this.adMobSvc.banner()
-
+      this.soundSvc.background()
     })
 
   }
@@ -72,6 +75,8 @@ export class HomePage implements OnInit {
 
   counter() {
 
+    new Audio('../../assets/sounds/button.mp3').play()
+
     //this.vibration.vibrate(100)
 
     //this.nativeAudio.play('bbutton')
@@ -80,14 +85,16 @@ export class HomePage implements OnInit {
 
     ////////  COINS SYSTEM  ////////
 
-    if(this.count.toString().substr(this.count.toString().length - 2,this.count.toString().length).includes('00')){
+    if (this.count.toString().substr(this.count.toString().length - 2, this.count.toString().length).includes('00')) {
       this.coins = this.coins + 10
       localStorage.setItem('coins', this.coins.toString())
-    } 
+      new Audio('../../assets/sounds/reward.mp3').play()
+
+    }
 
     ////////////////////////////////
 
-  
+
 
     const formatCash = n => {
       if (n < 1e3) return n;
@@ -120,7 +127,7 @@ export class HomePage implements OnInit {
 
   leaderboard() {
 
-    if(this.realCount <= 500){
+    if (this.realCount <= 500) {
 
     } else {
       this.route.navigate(['/leaderboard'])
@@ -136,7 +143,7 @@ export class HomePage implements OnInit {
     this.route.navigate(['/stats'])
   }
 
-  async shop(){
+  async shop() {
 
     const modal = await this.modalCtrl.create({
       component: ShopPage
@@ -144,5 +151,5 @@ export class HomePage implements OnInit {
     await modal.present()
   }
 
-  
+
 }
