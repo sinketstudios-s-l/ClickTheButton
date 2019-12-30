@@ -17,22 +17,22 @@ export class ShopPage implements OnInit {
     this.routes = [
       {
         id: 1,
-        src: "../../assets/button.png",
+        src: "../../assets/buttons/button.png",
         price: 300
       },
       {
         id: 2,
-        src: "../../assets/button.png",
+        src: "../../assets/buttons/button.png",
         price: 300
       },
       {
         id: 3,
-        src: "../../assets/button.png",
+        src: "../../assets/buttons/button.png",
         price: 300
       },
       {
         id: 4,
-        src: "../../assets/button.png",
+        src: "../../assets/buttons/button.png",
         price: 300
       },
     ]

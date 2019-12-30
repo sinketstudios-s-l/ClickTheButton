@@ -16,14 +16,12 @@
 
   <ion-row>
 
-    <audio src=""></audio>
-
-    <ion-col size="6" *ngFor="let b of routes" class="no-padding no-margin">
+    <ion-col size="4" *ngFor="let b of routes" class="no-padding no-margin">
       <ion-card class="ion-padding">
-        <img src="{{b.src}}" alt="">
+        <img src="{{b.src}}" >
       </ion-card>
       <div class="price">
-        <i>
+        <i id="coins">
           <svg class="ico" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1"
             x="0px" y="0px" viewBox="0 0 58 58" style="enable-background:new 0 0 58 58;" xml:space="preserve">
             <g id="XMLID_21_">
@@ -118,7 +116,7 @@
             </g>
           </svg>
         </i>
-        <span>{{b.price}}</span>
+        <span class="priceTxt">{{b.price}}</span>
       </div>
     </ion-col>
 
