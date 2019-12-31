@@ -16,7 +16,7 @@ import { SoundService } from '../services/sound.service';
 export class HomePage implements OnInit {
 
   date = new Date().getFullYear()
-  version = "Build version 0.1.560"
+  version = "Build version 0.1.580"
 
   lastCount
   realCount

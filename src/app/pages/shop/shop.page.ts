@@ -18,22 +18,27 @@ export class ShopPage implements OnInit {
       {
         id: 1,
         src: "../../assets/buttons/button.png",
-        price: 300
+        price: 0
       },
       {
         id: 2,
-        src: "../../assets/buttons/button.png",
-        price: 300
+        src: "../../../assets/buttons/green-button.png",
+        price: 200
       },
       {
         id: 3,
-        src: "../../assets/buttons/button.png",
+        src: "../../../assets/buttons/l-blue-button.png",
         price: 300
       },
       {
         id: 4,
-        src: "../../assets/buttons/button.png",
-        price: 300
+        src: "../../assets/buttons/pink-button.png",
+        price: 400
+      },
+      {
+        id: 5,
+        src: "../../assets/buttons/yellow-button.png",
+        price: 500
       },
     ]
 
