@@ -9,6 +9,7 @@ ion-content {
 }
 
 .credits {
+
     font-size: 12px;
     color: #818181;
     position: absolute;
@@ -21,14 +22,5 @@ ion-content {
 .ico {
     width: 32px;
     height: 32px;
-}
-
-.soundController{
-    text-align: left;
-}
-
-.txt {
-    vertical-align: super;
-    padding: 5px;
-    font-size: 20px;
+    margin: 1rem;
 }
