@@ -14,7 +14,6 @@ export class SoundService {
     this.bgSound.loop = true
 
     if (this.sound == "true") {
-      this.bgSound.muted = false
       this.bgSound.play()
     } else {
       this.bgSound.muted = true

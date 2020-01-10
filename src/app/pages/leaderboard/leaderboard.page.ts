@@ -17,57 +17,25 @@ export class LeaderboardPage implements OnInit {
   count = Number(localStorage.getItem("count"))
   userRef = firebase.database().ref('users/')
 
-  uMain
-  uSub
-  ban: boolean
-  username
   constructor(
     private afs: AngularFirestore,
     private alertCtrl: AlertController,
     private router: Router,
-    private loadingCtrl: LoadingController,
-
-  ) {
-    this.uMain = this.afs.doc(`users/${this.uid}`)
-    this.uSub = this.uMain.valueChanges().subscribe(e => {
-      this.ban = e.ban
-      this.username = e.user
-    })
-  }
+    private loadingCtrl: LoadingController
+  ) { }
 
   ngOnInit() {
 
-    this.afs.collection('users').ref.where('ban', '==', false).orderBy('count', 'desc').get()
+    this.afs.collection('users').ref.orderBy('count', 'desc').get()
       .then((snapshop) => {
         snapshop.docs.forEach(doc => {
           this.renderList(doc)
         })
-      }).then(() => {
-        if (this.ban == true) {
-          console.log(this.ban)
-          this.banned()
-          localStorage.setItem('count', '0')
-          localStorage.setItem('coins', '0')
-          localStorage.setItem('ban', 'true')
-          this.router.navigate(['/home']).then(()=>{window.location.reload()})
-        } else {
-          console.log(this.ban)
-        }
       })
 
     if (!this.uid) { this.accReg() }
 
 
-  }
-
-  async banned() {
-
-    const alert = await this.alertCtrl.create({
-      header: "Cheater Detected",
-      message: "Your account has been \n<b>banned permanently\n</b> from leaderboard for cheating on it. If you think this can be an error, you can use our email: \n<b>support@sinketstudios.com\n</b>.",
-      buttons: ['Close']
-    })
-    await alert.present()
   }
 
   renderList(doc) {
@@ -88,8 +56,8 @@ export class LeaderboardPage implements OnInit {
     let user = document.createElement('label')
     let countCont = document.createElement('div')
     let count = document.createElement('span')
-
-
+    
+    
     item.setAttribute('class', 'item')
     item.style.background = "#bcd5d6"
     item.style.border = "1px solid #aac4c5"
@@ -125,7 +93,7 @@ export class LeaderboardPage implements OnInit {
     leaderPos.style.minWidth = "35px"
     leaderPos.style.height = "35px"
     leaderPos.style.borderRadius = "5px"
-
+    
 
     user.innerHTML = doc.data().user
     user.style.position = "absolute"
@@ -136,7 +104,7 @@ export class LeaderboardPage implements OnInit {
     user.style.padding = "10px"
     user.style.fontSize = "20px"
 
-
+    
     countCont.style.position = "absolute"
     countCont.style.right = "0%"
     countCont.style.top = "50%"
@@ -150,9 +118,9 @@ export class LeaderboardPage implements OnInit {
     countCont.style.zIndex = "2"
 
 
-
-    count.innerHTML = formatCash(doc.data().count)
-
+    
+    count.innerHTML = formatCash(doc.data().count)    
+    
     // item.appendChild(leaderPos)
     item.appendChild(itemLight)
     item.appendChild(user)
@@ -160,7 +128,7 @@ export class LeaderboardPage implements OnInit {
     countCont.appendChild(count)
     row.appendChild(item)
 
-
+    
   }
 
   private randomString(length) {
@@ -201,7 +169,7 @@ export class LeaderboardPage implements OnInit {
           text: "next",
           handler: data => {
 
-            this.uid = this.randomString(30)
+            this.uid = this.randomString(30)            
 
             this.afs.doc(`users/${this.uid}`).set({
               uid: this.uid,
@@ -248,10 +216,14 @@ export class LeaderboardPage implements OnInit {
   }
 
 
-  dataaa() {
+  dataaa(){
 
-    this.banned()
+    let data = {
+      user: "sasd",
+      adssa: "asdasd"
+    }
 
+    this.userRef.push(data)
   }
 
 

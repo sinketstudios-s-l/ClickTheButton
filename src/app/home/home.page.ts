@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 //import { Vibration } from '@ionic-native/vibration/ngx';
-import { ModalController, Platform, ActionSheetController, ToastController, PopoverController } from '@ionic/angular';
+import { ModalController, Platform, ActionSheetController, ToastController } from '@ionic/angular';
 import { SettingsPage } from '../settings/settings.page';
 import { AdMobFreeService } from '../services/ad-mob-free.service';
 import { Router } from '@angular/router';
 import { ShopPage } from '../pages/shop/shop.page';
 import { SoundService } from '../services/sound.service';
-import { PopoverPage } from '../pages/popover/popover.page';
-import { AngularFirestore } from '@angular/fire/firestore';
 
 
 @Component({
@@ -26,24 +24,19 @@ export class HomePage implements OnInit {
 
   coins: number = Number(localStorage.getItem('coins'))
 
-  lifeTimeCount: number = 0
-  button
 
-  uid = localStorage.getItem('uid')
-  ban = localStorage.getItem('ban')
-  bonus = localStorage.getItem('bonus')
-  bonusTime: number;
-  bonusCounter
+
+  lifeTimeCount: number = 0
   constructor(
     private modalCtrl: ModalController,
     private adMobSvc: AdMobFreeService,
     private platform: Platform,
     private route: Router,
     private toastCtrl: ToastController,
-    private soundSvc: SoundService,
-    private popCtrl: PopoverController,
-    private afs: AngularFirestore
+    private soundSvc: SoundService
   ) {
+
+
 
     const formatCash = n => {
       if (n < 1e3) return n;
@@ -61,44 +54,11 @@ export class HomePage implements OnInit {
 
     this.lifeTimeCount = Number(sessionStorage.getItem('lifeCount'))
 
-    this.button = localStorage.getItem('btn')
-
-
-    if (!this.lastCount) {
+    if (!this.lastCount || !this.coins) {
       this.lastCount = 0
-    } else if (!this.coins) {
       this.coins = 0
-    } else if (!localStorage.getItem('sound')) {
-      localStorage.setItem('sound', 'true')
-    } else if (!localStorage.getItem('bonus')) {
-      localStorage.setItem('bonus', 'false')
     }
 
-
-
-    this.bonusCountDown()
-
-
-
-
-    /// AUTOSAVER SYSTEM ////
-
-    // var counter = setInterval(x => {
-    //   var time = Number(localStorage.getItem('time'))
-    //   time += 1;
-
-    //   if (time >= 30) {
-    //     localStorage.setItem('time','0')
-    //     time = 0
-    //     this.afs.doc(`users/${this.uid}`).update({
-    //       count: this.count
-    //     })
-    //   }
-
-    //   localStorage.setItem('time', time.toString())
-    // }, 1000);
-
-    /////////////////////////////
   }
 
   ngOnInit() {
@@ -110,47 +70,18 @@ export class HomePage implements OnInit {
 
   }
 
-  /// BONUS SYSTEM ///
-
-  getBonus() {
-    clearInterval(this.bonusCounter)
-    var bonusDiv = document.getElementById("bonusT")
-    bonusDiv.style.display = "none"
-
-    this.adMobSvc.bonusReward()
-  }
 
 
-  bonusCountDown() {
-
-    this.bonusCounter = setInterval(x => {
-      var bonusDiv = document.getElementById("bonusT")
-      bonusDiv.style.display = "block"
-      var time = Number(localStorage.getItem('bonusTime'))
-      time -= 1;
-
-      if (time == 0) {
-        time = 15
-        clearInterval(this.bonusCounter)
-        bonusDiv.style.display = "none"
-      }
-
-      localStorage.setItem('bonusTime', time.toString())
-      this.bonusTime = Number(localStorage.getItem('bonusTime'))
-    }, 1000);
-  }
-  ///////////////////
 
   counter() {
 
     new Audio('../../assets/sounds/button.mp3').play()
 
-    if (this.bonus == 'true') {
-      this.count = this.count + 2
-    } else {
-      this.count = this.count + 1
-    }
+    //this.vibration.vibrate(100)
 
+    //this.nativeAudio.play('bbutton')
+
+    this.count = this.count + 1
 
     ////////  COINS SYSTEM  ////////
 
@@ -163,15 +94,7 @@ export class HomePage implements OnInit {
 
     ////////////////////////////////
 
-    switch (this.count) {
-      case 500:
-        // this.popOver("500")
-        new Audio("../../assets/sounds/achievement.wav").play()
-        break;
-      case 100000:
 
-        break;
-    }
 
     const formatCash = n => {
       if (n < 1e3) return n;
@@ -192,15 +115,6 @@ export class HomePage implements OnInit {
     this.realCount = Number(localStorage.getItem('count'))
 
   }
-
-  async popOver(id: string) {
-    const pop = await this.popCtrl.create({
-      component: PopoverPage,
-      id: id
-    })
-    await pop.present()
-  }
-
 
   async settings() {
 

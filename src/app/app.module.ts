@@ -23,7 +23,6 @@ import { AngularFirestoreModule } from '@angular/fire/firestore'
 import { AngularFireStorageModule } from '@angular/fire/storage'
 import { AngularFireAuthModule } from '@angular/fire/auth'
 import { ShopPageModule } from './pages/shop/shop.module';
-import { PopoverPageModule } from './pages/popover/popover.module';
 
 var firebaseConfig = {
   apiKey: "AIzaSyDpjocgE3TOfWPCCHVJRyNgYlEuoa84Ab4",
@@ -47,8 +46,7 @@ var firebaseConfig = {
     AngularFirestoreModule.enablePersistence(),
     AppRoutingModule,
     SettingsPageModule,
-    ShopPageModule,
-    PopoverPageModule
+    ShopPageModule
   ],
   providers: [
     Vibration,

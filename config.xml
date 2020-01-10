@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.sinketstudios.clickthebutton" version="0.1.6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.sinketstudios.clickthebutton" version="0.1.580" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Simple Button Clicker</name>
     <description>Do you live stressed lately? Press the red button to end the stress, click, add, get all the achievements and compete against other clickers in the leaderboard.</description>
     <author email="support@sinketstudios.es" href="http://sinketstudios.es/">SinketStudios SL</author>
