@@ -46,6 +46,14 @@ export class SoundService {
 
 
   }
+
+  achievSound(){
+    new Audio('../../assets/sounds/achievement.wav').play()
+  }
+
+  rewardSound(){
+    new Audio('../../assets/sounds/reward.mp3').play()
+  }
 }
 
 

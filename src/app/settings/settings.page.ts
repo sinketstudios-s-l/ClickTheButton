@@ -12,7 +12,7 @@ export class SettingsPage implements OnInit {
   theme
 
   date = new Date().getFullYear()
-  version = "Build version 0.1.565"
+  version = "Build v.0.1.615"
 
   fx = localStorage.getItem('fx')
   sound = localStorage.getItem('sound')

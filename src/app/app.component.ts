@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, ModalController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { NativeAudio } from '@ionic-native/native-audio/ngx';
+import { SplashPage } from './pages/splash/splash.page';
+import { delay } from 'q';
+
 
 @Component({
   selector: 'app-root',
@@ -15,23 +17,32 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private nativeAudio: NativeAudio
+    private modalCtrl: ModalController
+
   ) {
+
+    splashScreen.hide()
     this.initializeApp();
 
-    nativeAudio.preloadSimple('background', "../../../assets/sounds/background.mp3").then(a => {
-      console.log(a)
-
-      nativeAudio.play('background')
-      nativeAudio.loop('background')
-
-    })
   }
 
   initializeApp() {
-    this.platform.ready().then(() => {
+    this.platform.ready().then(async () => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      const modal = await this.modalCtrl.create({
+        component: SplashPage,
+        animated: false
+      })
+
+      await modal.present().then(()=> {
+        delay(3750).then(()=>{
+          this.modalCtrl.dismiss()
+        })
+      })
+
+
     });
   }
 }

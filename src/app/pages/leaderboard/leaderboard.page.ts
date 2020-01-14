@@ -17,6 +17,7 @@ export class LeaderboardPage implements OnInit {
   count = Number(localStorage.getItem("count"))
   userRef = firebase.database().ref('users/')
 
+  leaderboard:boolean
   constructor(
     private afs: AngularFirestore,
     private alertCtrl: AlertController,
@@ -25,16 +26,22 @@ export class LeaderboardPage implements OnInit {
   ) { }
 
   ngOnInit() {
-
-    this.afs.collection('users').ref.orderBy('count', 'desc').get()
+    // ADD SOME LIMIT
+    this.afs.collection('users').ref.orderBy('count', 'desc').where('count', '>=', 500).where('leaderboard', '==', true).where('ban','==', false).get()
       .then((snapshop) => {
         snapshop.docs.forEach(doc => {
           this.renderList(doc)
         })
       })
 
-    if (!this.uid) { this.accReg() }
+    this.main = this.afs.doc(`users/${this.uid}`)
+    this.sub = this.main.valueChanges().subscribe( e => {
+      this.leaderboard = e['leaderboard']
+      if (this.leaderboard == false) { this.accReg() }
+    })
 
+
+    
 
   }
 
@@ -131,15 +138,6 @@ export class LeaderboardPage implements OnInit {
     
   }
 
-  private randomString(length) {
-    var result = '';
-    var characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for (var i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-  }
 
   async accReg() {
 
@@ -168,16 +166,13 @@ export class LeaderboardPage implements OnInit {
         {
           text: "next",
           handler: data => {
-
-            this.uid = this.randomString(30)            
-
-            this.afs.doc(`users/${this.uid}`).set({
-              uid: this.uid,
+     
+            this.afs.doc(`users/${this.uid}`).update({
               count: this.count,
-              user: data.user
+              user: data.user,
+              leaderboard: true
 
             }).then(() => {
-              localStorage.setItem('uid', this.uid)
               window.location.reload()
             })
 
@@ -209,21 +204,12 @@ export class LeaderboardPage implements OnInit {
       await loading.dismiss()
       window.location.reload()
 
+    }).catch(async () => {
+      
     })
 
 
 
-  }
-
-
-  dataaa(){
-
-    let data = {
-      user: "sasd",
-      adssa: "asdasd"
-    }
-
-    this.userRef.push(data)
   }
 
 

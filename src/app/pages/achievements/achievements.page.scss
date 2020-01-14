@@ -1,12 +1,60 @@
 ion-content {
-    text-align: center;
+  text-align: center;
 }
 
-.achvRow {
-    text-align: left;
-    padding: 10px;
-    width: 90%;
-    display: inline-block;
-    margin: 0 auto;
+.achvRow  {
+  text-align: left;
+  padding: 10px;
+  width: 90%;
+  display: inline-block;
+  margin: 0 auto;
 }
 
+.achv-item {
+  width: 90%;
+  margin: 5px auto;
+  position: relative;
+  height: 50px;
+}
+
+.achv-tlt{
+    position: absolute;
+    top: 4px;
+    left: 56px;
+}
+
+.achv-compl {
+  position: absolute;
+  white-space: nowrap;
+  top: 15px;
+  left: 56px;
+  font-size: 13px;
+  color: #999999;
+}
+
+.achv-goal {
+    position: absolute;
+    top: 44%;
+    left: 24%;
+    transform: translate(-50%, -50%);
+    color: gray;
+}
+
+.achv-item img {
+  width: 40px;
+  border-radius: 50%;
+  height: 40px;
+  object-fit: cover;
+  position: absolute;
+  top: 50%;
+  left: 2rem;
+  transform: translate(-50%, -50%);
+}
+
+ion-progress-bar {
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  width: 80%;
+  transform: translate(-50%, -50%);
+}

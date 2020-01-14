@@ -10,9 +10,6 @@ ion-content{
     width: 100%;
 }
 
-img {
-    width: 200px;
-}
 
 .credits {
 
@@ -34,8 +31,26 @@ img {
     margin: 1rem;
 }
 
+.btn{
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}
 
-
+.soon{
+    position: absolute;
+    background: #d9d9d9;
+    padding: 2px;
+    font-size: 9px;
+    border-radius: 8px;
+    width: 40px;
+    text-align: center;
+    transform: rotate(-45deg);
+    top: 0.90rem;
+    left: 0px;
+    color: white;
+    font-weight: bold;
+}
 
 .pointAdd{
     display: none;
@@ -69,9 +84,17 @@ img {
 
 @media only screen and (max-height: 568px) {
    
-    img {
+    .btn{
         width: 150px;
+        height: 150px;
     }
   }
 
 
+  .popOver{
+    background: #00000038;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+}

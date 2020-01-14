@@ -23,6 +23,10 @@ import { AngularFirestoreModule } from '@angular/fire/firestore'
 import { AngularFireStorageModule } from '@angular/fire/storage'
 import { AngularFireAuthModule } from '@angular/fire/auth'
 import { ShopPageModule } from './pages/shop/shop.module';
+import { UserService } from './services/user.service';
+import { InfoPageModule } from './pages/info/info.module';
+import { AchievServiceService } from './services/achiev-service.service';
+import { SplashPageModule } from './pages/splash/splash.module';
 
 var firebaseConfig = {
   apiKey: "AIzaSyDpjocgE3TOfWPCCHVJRyNgYlEuoa84Ab4",
@@ -46,7 +50,9 @@ var firebaseConfig = {
     AngularFirestoreModule.enablePersistence(),
     AppRoutingModule,
     SettingsPageModule,
-    ShopPageModule
+    ShopPageModule,
+    InfoPageModule,
+    SplashPageModule,
   ],
   providers: [
     Vibration,
@@ -55,6 +61,8 @@ var firebaseConfig = {
     SplashScreen,
     AdMobFree,
     AdMobFreeService,
+    UserService,
+    AchievServiceService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

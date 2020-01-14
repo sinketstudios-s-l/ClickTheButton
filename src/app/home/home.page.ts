@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-//import { Vibration } from '@ionic-native/vibration/ngx';
-import { ModalController, Platform, ActionSheetController, ToastController } from '@ionic/angular';
+import { ModalController, Platform, ToastController, PopoverController } from '@ionic/angular';
 import { SettingsPage } from '../settings/settings.page';
 import { AdMobFreeService } from '../services/ad-mob-free.service';
 import { Router } from '@angular/router';
 import { ShopPage } from '../pages/shop/shop.page';
 import { SoundService } from '../services/sound.service';
+import { UserService } from '../services/user.service';
+import { InfoPage } from '../pages/info/info.page';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AchievServiceService } from '../services/achiev-service.service';
 
 
 @Component({
@@ -16,24 +19,29 @@ import { SoundService } from '../services/sound.service';
 export class HomePage implements OnInit {
 
   date = new Date().getFullYear()
-  version = "Build version 0.1.560"
+  version = "Build v.0.1.615"
 
   lastCount
   realCount
   count: number = 0
 
   coins: number = Number(localStorage.getItem('coins'))
-
-
-
   lifeTimeCount: number = 0
+  sound = localStorage.getItem('sound')
+
+  uid = localStorage.getItem('uid')
+  ban = localStorage.getItem('ban')
   constructor(
     private modalCtrl: ModalController,
     private adMobSvc: AdMobFreeService,
     private platform: Platform,
     private route: Router,
     private toastCtrl: ToastController,
-    private soundSvc: SoundService
+    private soundSvc: SoundService,
+    private userSvc: UserService,
+    private popOverCtrl: PopoverController,
+    private afs: AngularFirestore,
+    private achvSvc: AchievServiceService
   ) {
 
 
@@ -54,10 +62,30 @@ export class HomePage implements OnInit {
 
     this.lifeTimeCount = Number(sessionStorage.getItem('lifeCount'))
 
-    if (!this.lastCount || !this.coins) {
+    
+
+    if (!this.lastCount) {
       this.lastCount = 0
+    } if (!this.coins) {
+      localStorage.setItem('coins', '0')
       this.coins = 0
+    } if (!this.sound) {
+      soundSvc.background()
+      localStorage.setItem('sound', 'true')
+    } if (!this.uid){
+      this.uid = this.generateUID(30)
+        this.afs.doc(`users/${this.uid}`).set({
+          uid: this.uid,
+          count: 0,
+          ban: false,
+          leaderboard: false,
+          date: new Date()
+
+        })
+        localStorage.setItem('uid', this.uid)
     }
+
+
 
   }
 
@@ -71,29 +99,40 @@ export class HomePage implements OnInit {
   }
 
 
-
+private generateUID(length) {
+    var result = '';
+    var characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
 
   counter() {
 
     new Audio('../../assets/sounds/button.mp3').play()
 
-    //this.vibration.vibrate(100)
-
-    //this.nativeAudio.play('bbutton')
 
     this.count = this.count + 1
+
+    switch(this.count){
+      case 500:
+        this.soundSvc.achievSound()
+        this.achvSvc.achiev("d","d", "2")
+        break;
+    }
 
     ////////  COINS SYSTEM  ////////
 
     if (this.count.toString().substr(this.count.toString().length - 2, this.count.toString().length).includes('00')) {
       this.coins = this.coins + 10
       localStorage.setItem('coins', this.coins.toString())
-      new Audio('../../assets/sounds/reward.mp3').play()
+      this.soundSvc.rewardSound()
 
     }
 
     ////////////////////////////////
-
 
 
     const formatCash = n => {
@@ -151,5 +190,22 @@ export class HomePage implements OnInit {
     await modal.present()
   }
 
+
+  async info(e) {
+
+    console.log(e.target.id)
+
+    var id = e.target.id
+
+    const popOver = await this.popOverCtrl.create({
+      component: InfoPage,
+      mode: "ios",
+      componentProps: {
+        id: id
+      },
+      cssClass: "popOver"
+    })
+    await popOver.present()
+  }
 
 }
